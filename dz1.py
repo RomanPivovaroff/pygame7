@@ -86,7 +86,7 @@ def start_screen(x, y):
 #уровень
 running = True
 try:
-    level_name = 'level2.txt'
+    level_name = input()
     level = load_level(level_name)
 except FileNotFoundError:
     print('файл не найден')
