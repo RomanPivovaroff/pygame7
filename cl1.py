@@ -82,22 +82,21 @@ def start_screen(x, y):
         text_coord += intro_rect.height
         screen.blit(string_rendered, intro_rect)
 
-
-# экран
-pygame.init()
-display = pygame.display
-width = 400
-height = 300
-screen = display.set_mode((width, height))
-screen.fill((0, 0, 255))
+#уровень
+level = load_level('level1.txt')
 
 #тайлы
 tile_images = {'wall': load_image('box.png'), 'empty': load_image('grass.png')}
 player_image = load_image('mario.png')
 tile_width = tile_height = 50
 
-# основной персонаж
-player = None
+# экран
+pygame.init()
+display = pygame.display
+width = 400 if tile_width * len(level[0]) > 400 else tile_width * len(level[0])
+height = 300 if tile_height * len(level) > 300 else tile_height * len(level)
+screen = display.set_mode((width, height))
+screen.fill((0, 0, 255))
 
 # группы спрайтов
 all_sprites = pygame.sprite.Group()
@@ -107,12 +106,7 @@ player_group = pygame.sprite.Group()
 #старт меню
 start_screen(width, height)
 
-#уровень
-level = load_level('level.txt')
-
 start = False
-for i in level:
-    print(i)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
